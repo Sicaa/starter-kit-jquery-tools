@@ -17,11 +17,11 @@ Note that HTML elements generated are based on Bootstrap >= 3.* pagination compo
 
 ### Parameters
 
-- totalLines: total of items (used to calculate the number of pages, default 0),
-- linesPerPage: number of items we want to display per page (default 15),
-- nbPagesToShow: number of buttons to display around the current page (default 10),
-- actualPage: current page you're on (default 1),
-- callback: function to call on page change.
+- **totalLines**: total of items (used to calculate the number of pages, default 0),
+- **linesPerPage**: number of items we want to display per page (default 15),
+- **nbPagesToShow**: number of buttons to display around the current page (default 10),
+- **actualPage**: current page you're on (default 1),
+- **callback**: function to call on page change.
 
 ### Example
 
@@ -37,23 +37,27 @@ Note that HTML elements generated are based on Bootstrap >= 3.* pagination compo
 
 		function ajxSearch(wantedPage) {
 			$.ajax({
-				url: 'https://api.github.com/users/Sicaa/repos', // Getting all my repos :)
+				// Getting all my repos :)
+				url: 'https://api.github.com/users/Sicaa/repos', 
 				dataType: 'json',
 				type: 'GET',
 				success: function(data) {
-					var total = data.length; // Total of items
+					// Total of items
+					var total = data.length;
 
 					$.ajax({
-						url: 'https://api.github.com/users/Sicaa/repos?per_page=' + linesPerPage + '&page=' + wantedPage, // Getting just what we want for the pagination
+						// Getting just what we want for the pagination
+						url: 'https://api.github.com/users/Sicaa/repos',
+						data: { 'per_page': linesPerPage, 'page': wantedPage }
 						dataType: 'json',
 						type: 'GET',
 						success: function(r) {
-							$('#content').html('').append('<p>' + r[0].name + '</p><p>' + r[0].description + '</p>'); // Filling the content section
+							// Filling the content section
+							$('#content').html('<p>' + r[0].name + '</p><p>' + r[0].description + '</p>');
 
 							$('.pagination').pagination({
 								totalLines: total,
 								linesPerPage: linesPerPage,
-								nbPagesToShow: 10,
 								actualPage: wantedPage,
 								callback: ajxSearch
 							});
@@ -69,7 +73,8 @@ Note that HTML elements generated are based on Bootstrap >= 3.* pagination compo
 			});
 		}
 
-		ajxSearch(1); // First call, we want page 1
+		// First call, we want page 1
+		ajxSearch(1);
 	});
 </script>
 ```
