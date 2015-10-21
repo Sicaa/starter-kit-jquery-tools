@@ -17,9 +17,8 @@ jQuery(function() {
 			if (isNaN(parseInt(args.totalLines)) || isNaN(parseInt(args.linesPerPage)) || isNaN(parseInt(args.nbPagesToShow)) || isNaN(parseInt(args.actualPage)))
 				throw new Error('int params required');
 
-			obj.css('display', 'none').html('');
-
 			var obj = jQuery(this);
+			obj.css('display', 'none').html('');
 
 			var plus10 = false;
 			var minus10 = false;
